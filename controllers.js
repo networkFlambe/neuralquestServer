@@ -28,3 +28,26 @@ var ffbrain = function(req) {
 
 exports.simplenn = simplenn;
 exports.ffbrain = ffbrain;
+
+
+// var validateHidden = function(net) {
+//   var hidden = net.hidden;
+//   if(hidden.constructor !== Array) {
+//     return false;
+//   }
+//   if(hidden.length < 1 || hidden.length > 3) {
+//     return false;
+//   }
+//   hidden.forEach(function(item) {
+//     if(typeof item !== Number) {
+//       return false;
+//     }
+//     if(item < 1 || item > 5) {
+//       return false;
+//     }
+//     if(item % 1 !== 0) {
+//       return false;
+//     }
+//   }
+//   return true;
+// }
