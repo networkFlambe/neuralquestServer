@@ -8,6 +8,11 @@ var data = [{input: [0, 0], output: [0]},
            {input: [1, 1], output: [0]}];
 //nn setup:::::::::::::::::::::::::::::::::::::::
 
+
+var simpleMath = function(n){
+  return n + 1;
+};
+
 var simplenn = function(req) {
   var n = req.body.hidden;
   ffnet = new brain.NeuralNetwork({ hiddenlayers: [n] });
@@ -25,7 +30,7 @@ var ffbrain = function(req) {
   return ffnet.toJSON();
 }
 
-
+exports.simpleMath = simpleMath;
 exports.simplenn = simplenn;
 exports.ffbrain = ffbrain;
 
