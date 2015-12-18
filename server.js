@@ -2,15 +2,6 @@ var express = require('express');
 var path = require('path');
 var bodyParser = require('body-parser');
 var morgan = require('morgan');
-var routes = require('routes.js');
-
-//nn setup:::::::::::::::::::::::::::::::::::::::
-var brain = require('brain');
-var data = [{input: [0, 0], output: [0]},
-           {input: [0, 1], output: [1]},
-           {input: [1, 0], output: [1]},
-           {input: [1, 1], output: [0]}];
-//nn setup:::::::::::::::::::::::::::::::::::::::
 
 
 var app = express();
@@ -29,7 +20,13 @@ app.use(function(req, res, next) {
 
 app.use(morgan('dev'));
 
+app.get('/', function(req, res) {
+  res.send('Welcome to the home page!');
+});
 
+var apiRouter = require('./routes.js')(app, express);
+
+app.use('/api', apiRouter);
 
 app.listen(port);
 console.log('listening on ' + port);
