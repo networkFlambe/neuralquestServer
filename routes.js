@@ -20,6 +20,11 @@ module.exports = function(app, express) {
       res.json({result: controllers.simplenn(req)});
     });
 
+  apiRouter.route('/ffbrain')
+    .post(function(req, res) {
+      res.json({result: controllers.ffbrain(req)});
+    });  
+
   return apiRouter;
 
 }

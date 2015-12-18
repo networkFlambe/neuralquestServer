@@ -14,5 +14,17 @@ var simplenn = function(req) {
   return ffnet.train(data);
 };
 
-exports.simplenn = simplenn;
+var ffbrain = function(req) {
+  var net = JSON.parse(req.body.net);
+  //todo: add validation
+  var hidden = net.hidden;
+  var data = net.data;
+  ffnet = new brain.NeuralNetwork({ hiddenlayers: hidden });
+  //todo: does this need a callback??
+  ffnet.train(data);
+  return ffnet.toJSON();
+}
 
+
+exports.simplenn = simplenn;
+exports.ffbrain = ffbrain;
