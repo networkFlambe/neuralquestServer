@@ -14,6 +14,5 @@ var simplenn = function(req) {
   return ffnet.train(data);
 };
 
-
 exports.simplenn = simplenn;
 
