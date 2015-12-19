@@ -1,13 +1,10 @@
 var brain = require('brain');
 var fs = require('fs');
+var numeralnetobj = require('./assets/numeralNet.json');
 
-var fs = require('fs');
-var obj, numeralnet;
-fs.readFile('file', 'utf8', function (err, data) {
-  if (err) throw err;
-  obj = JSON.parse(data);
-  numeralnet = net.fromJSON(obj);
-});
+
+var numeralnet = new brain.NeuralNetwork();
+numeralnet.fromJSON(numeralnetobj);
 
 var simplenn = function(req) {
   var n = req.body.hidden;
@@ -99,7 +96,7 @@ var runMNIST = function(req) {
     net = {};
   }
 
-  return 'hello';
+  return numeralnet.run(net.input);
 };
 
 
