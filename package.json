@@ -1,5 +1,5 @@
 {
-  "name": "backend",
+  "name": "neuralquestServer",
   "main": "server.js",
   "dependencies": {
     "body-parser": "^1.14.2",
@@ -18,6 +18,19 @@
     "grunt-express-server": "^0.5.1"
   },
   "scripts": {
-    "test": "grunt test"
+    "test": "grunt test",
+    "test": "mocha test",
+    "start": "node server.js"
+
+    
+  },
+  "devDependencies": {
+    "chai": "^3.4.1",
+    "grunt": "^0.4.5",
+    "grunt-contrib-watch": "^0.6.1",
+    "grunt-express-server": "^0.5.1",
+    "mocha": "^2.3.4",
+    "request": "^2.67.0",
+    "supertest": "^1.1.0"
   }
 }
