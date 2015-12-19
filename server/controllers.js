@@ -2,6 +2,7 @@ var brain = require('brain');
 var fs = require('fs');
 var numeralnetobj = require('./assets/numeralNet.json');
 var testdataobj = require('./assets/sampleMNIST.json'); 
+var utils = require('./utils.js');
 
 //get trained MNIST brain
 var numeralnet = new brain.NeuralNetwork();
@@ -97,12 +98,17 @@ var runMNIST = function(req) {
   }
   var checkIndex = net.numberToCheck || 0;
 
-  var result = {
-    trueValue: checkIndex,
-    predictedValue: numeralnet.run(testdataobj[checkIndex])
+  if(utils.validateIndex(checkIndex)) {
+    var result = {
+      trueValue: checkIndex,
+      predictedValue: numeralnet.run(testdataobj[checkIndex])
+    }
+    return result;
+  } else {
+    return 'error';
   }
 
-  return result;
+
 };
 
 
