@@ -20,7 +20,7 @@ app.use(function(req, res, next) {
 app.use(morgan('dev'));
 
 app.get('/', function(req, res) {
-  res.send('Welcome to the home page!');
+  res.send(200, {welcome: 'Welcome to the home page!'});
 });
 
 var apiRouter = require('./server/routes.js')(app, express);
