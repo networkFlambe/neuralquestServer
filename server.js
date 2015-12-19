@@ -23,7 +23,7 @@ app.get('/', function(req, res) {
   res.send('Welcome to the home page!');
 });
 
-var apiRouter = require('./routes.js')(app, express);
+var apiRouter = require('./server/routes.js')(app, express);
 
 app.use('/api', apiRouter);
 
