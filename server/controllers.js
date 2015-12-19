@@ -1,10 +1,14 @@
 var brain = require('brain');
 var fs = require('fs');
 var numeralnetobj = require('./assets/numeralNet.json');
+var testdataobj = require('./assets/sampleMNIST.json'); 
 
-
+//get trained MNIST brain
 var numeralnet = new brain.NeuralNetwork();
 numeralnet.fromJSON(numeralnetobj);
+
+//get test data for MNIST brain
+//var testdata = JSON.parse(testdataobj);
 
 var simplenn = function(req) {
   var n = req.body.hidden;
@@ -53,17 +57,13 @@ var trainRun = function(req) {
     binaryThresh:binaryThresh
   });
 
- // if(net.netTrain){
-    answer.push(ffnet.train(data, options));
-  //}
+  answer.push(ffnet.train(data, options));
 
-  //if(net.netTrain && net.netRun){
-
-    for(var i = 0; i < input.length; i++){
-      answer.push(ffnet.run(input[i]));
-    //}
-    var trainedBrain = ffnet.toJSON();
+  for(var i = 0; i < input.length; i++) {
+    answer.push(ffnet.run(input[i]));
   }
+  
+  var trainedBrain = ffnet.toJSON();
 
   var result = {
     answer: answer,
@@ -95,8 +95,14 @@ var runMNIST = function(req) {
   catch(err) {
     net = {};
   }
+  var checkIndex = net.numberToCheck || 0;
 
-  return numeralnet.run(net.input);
+  var result = {
+    trueValue: checkIndex,
+    predictedValue: numeralnet.run(testdataobj[checkIndex])
+  }
+
+  return result;
 };
 
 
