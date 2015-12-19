@@ -1,12 +1,10 @@
 var brain = require('brain');
+var fs = require('fs');
+var numeralnetobj = require('./assets/numeralNet.json');
 
-//nn setup:::::::::::::::::::::::::::::::::::::::
-var data = [{input: [0, 0], output: [0]},
-           {input: [0, 1], output: [1]},
-           {input: [1, 0], output: [1]},
-           {input: [1, 1], output: [0]}];
-//nn setup:::::::::::::::::::::::::::::::::::::::
 
+var numeralnet = new brain.NeuralNetwork();
+numeralnet.fromJSON(numeralnetobj);
 
 var simplenn = function(req) {
   var n = req.body.hidden;
@@ -15,7 +13,14 @@ var simplenn = function(req) {
 };
 
 var trainRun = function(req) {
-  var net = JSON.parse(req.body.net);
+  var net;
+  try {
+    net = JSON.parse(req.body.net);
+  }
+  catch(err) {
+    net = {};
+  }
+  
   //todo: add validation
 
   var data = net.data || [{input: [0, 0], output: [0]},
@@ -81,8 +86,23 @@ var trainRun = function(req) {
   return result;
 }
 
+
+var runMNIST = function(req) {
+  var net;
+  try {
+    net = JSON.parse(req.body.net);
+  }
+  catch(err) {
+    net = {};
+  }
+
+  return numeralnet.run(net.input);
+};
+
+
 exports.simplenn = simplenn;
 exports.trainRun = trainRun;
+exports.runMNIST = runMNIST;
 
 
 // var validateHidden = function(net) {
