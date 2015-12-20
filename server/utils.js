@@ -43,6 +43,10 @@ var validateRange = function(n, lo, hi) {
   return n >= lo && n <= hi;
 }
 
-exports.validateTrainRunInputs = validateTrainRunInputs;
-exports.validateIndex = validateIndex;
 
+exports.validateTrainRunInputs = validateTrainRunInputs;
+
+//export helper functions for testing
+exports.validateIndex = validateIndex;
+exports.checkInteger = checkInteger;
+exports.validateRange = validateRange;

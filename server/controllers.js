@@ -15,6 +15,7 @@ var simplenn = function(req) {
 };
 
 var trainRun = function(req) {
+
   var net;
   try {
     net = JSON.parse(req.body.net);
