@@ -11,7 +11,7 @@ var validateTrainRunInputs = function(options, ffnetSetup) {
   if(!validateRange(ffnetSetup.learningRate, 0, 1)) {
     return false;
   }
-  if(Array.isArray(ffnetSetup.hiddenSizes)) {
+  if(!Array.isArray(ffnetSetup.hiddenSizes)) {
     return false;
   }
   if(ffnetSetup.hiddenSizes.length > 5) {
@@ -26,8 +26,8 @@ var validateTrainRunInputs = function(options, ffnetSetup) {
   //not doing validation on data or input for trained network server-side
   //should throw error on attempted training, if something wrong with these
 
-
   return true;
+
 };
 
 
