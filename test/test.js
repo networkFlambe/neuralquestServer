@@ -21,9 +21,9 @@ describe('Controllers', function(){
     }
   }
   describe('trainRun', function(){
-    it('trainRun should return an string if no params are passed', function(){
+    it('trainRun should return an object if no params are passed', function(){
       var result = controllers.trainRun({body:{}});
-      expect(result).to.be.an('string');
+      expect(result).to.be.an('object');
     });
 
     xit('trainRun should return an object if params are passed', function(){
@@ -62,15 +62,15 @@ describe('Controllers', function(){
     };
 
     it('validateTrainRunInputs should return true if all correct params are passed', function(){
-      expect(utils.validateTrainRunInputs(optionsTrue, ffnetSetupTrue))
+      expect(utils.validateTrainRunInputs(optionsTrue, ffnetSetupTrue)).to.beTrue;
     });
 
     it('validateTrainRunInputs should return false if incorrect options are passed', function(){
-      expect(utils.validateTrainRunInputs(optionsFalse, ffnetSetupTrue))
+      expect(utils.validateTrainRunInputs(optionsFalse, ffnetSetupTrue)).to.beTrue;
     });
 
     it('validateTrainRunInputs should return false if incorrect ffnetSetup are passed', function(){
-      expect(utils.validateTrainRunInputs(optionsTrue, ffnetSetupFalse))
+      expect(utils.validateTrainRunInputs(optionsTrue, ffnetSetupFalse)).to.beTrue;
     });
 
 

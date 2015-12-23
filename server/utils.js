@@ -11,7 +11,7 @@ var validateTrainRunInputs = function(options, ffnetSetup) {
   if(!validateRange(ffnetSetup.learningRate, 0, 1)) {
     return false;
   }
-  if(!Array.isArray(ffnetSetup.hiddenSizes)) {
+  if(Array.isArray(ffnetSetup.hiddenSizes)) {
     return false;
   }
   if(ffnetSetup.hiddenSizes.length > 5) {
