@@ -15,11 +15,6 @@ module.exports = function(app, express) {
     res.json({ message: 'hooray! welcome to our api!' });
   });
 
-  apiRouter.route('/simplenn')
-    .post(function(req, res) {
-      res.json({result: controllers.simplenn(req)});
-    });
-
   apiRouter.route('/trainRun')
     .post(function(req, res) {
       res.json({result: controllers.trainRun(req)});
