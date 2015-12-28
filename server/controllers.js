@@ -97,18 +97,18 @@ var simpleMNIST = function(req) {
     net = {};
   }
   var input = net.input || [
-                                  1, 1, 1, 1, 1,
-                                  1, 0, 0, 0, 1,
-                                  1, 0, 0, 0, 1,
-                                  1, 0, 0, 0, 1,
-                                  1, 1, 1, 1, 1
-                                  ];
+                            1, 1, 1, 1, 1,
+                            1, 0, 0, 0, 1,
+                            1, 0, 0, 0, 1,
+                            1, 0, 0, 0, 1,
+                            1, 1, 1, 1, 1
+                            ];
 
   if(input.length === 25) {
     var result = {
       predictedValue: simpleMNIST.run(input)
     }
-    return result;gits
+    return result;
   } else {
     return 'error';
   }
