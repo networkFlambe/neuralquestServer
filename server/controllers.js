@@ -1,12 +1,16 @@
 var brain = require('brain');
 var fs = require('fs');
 var numeralnetobj = require('./assets/numeralNet.json');
+var simpleMNISTobj = require('./assets/simpleMNIST.json')
 var testdataobj = require('./assets/sampleMNIST.json'); 
 var utils = require('./utils.js');
 
 //get trained MNIST brain
 var numeralnet = new brain.NeuralNetwork();
 numeralnet.fromJSON(numeralnetobj);
+
+var simpleMNIST = new brain.NeuralNetwork();
+simpleMNIST.fromJSON(simpleMNISTobj);
 
 var trainRun = function(req) {
 
@@ -82,35 +86,58 @@ var trainRun = function(req) {
   catch(err) {
     net = {};
   }
-  
+};
 
-
-}
-
-
-var runMNIST = function(req) {
+var simpleMNIST = function(req) {
   var net;
   try {
-    net = JSON.parse(req.body.net);
+    net = req.body;
   }
   catch(err) {
     net = {};
   }
-  var checkIndex = net.numberToCheck || 0;
+  var input = net.input || [
+                                  1, 1, 1, 1, 1,
+                                  1, 0, 0, 0, 1,
+                                  1, 0, 0, 0, 1,
+                                  1, 0, 0, 0, 1,
+                                  1, 1, 1, 1, 1
+                                  ];
 
-  if(utils.validateIndex(checkIndex)) {
+  if(input.length === 25) {
     var result = {
-      trueValue: checkIndex,
-      predictedValue: numeralnet.run(testdataobj[checkIndex])
+      predictedValue: simpleMNIST.run(input)
     }
-    return result;
+    return result;gits
   } else {
     return 'error';
   }
 
+};
+
+var runMNIST = function(req) {
+  var net;
+  try {
+    net = req.body;
+    var checkIndex = net.numberToCheck || 0;
+
+    if(utils.validateIndex(checkIndex)) {
+      var result = {
+        trueValue: checkIndex,
+        predictedValue: numeralnet.run(testdataobj[checkIndex])
+      }
+      return result;
+    } else {
+      return 'error';
+    }
+  }
+  catch(err) {
+    net = {};
+  }
 
 };
 
 exports.trainRun = trainRun;
+exports.simpleMNIST = simpleMNIST;
 exports.runMNIST = runMNIST;
 
