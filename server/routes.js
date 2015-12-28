@@ -22,7 +22,7 @@ module.exports = function(app, express) {
 
   apiRouter.route('/simpleMNIST')
     .post(function(req, res) {
-      res.json({result: controllers.runMNIST(req)});
+      res.json({result: controllers.simpleMNIST(req)});
     });
 
   apiRouter.route('/runMNIST')
