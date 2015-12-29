@@ -104,14 +104,19 @@ var runSimpleMNIST = function(req) {
                             1, 1, 1, 1, 1
                             ];
 
+  var result = {
+    predictedValue: null,
+    log: null
+  };
   if(input.length === 25) {
-    var result = {
-      predictedValue: simpleMNIST.run(input)
-    }
-    return result;
+    result.predictedValue = simpleMNIST.run(input)
+    result.log = 'OK'  
+    //return result;
   } else {
-    return 'error';
+    result.log = 'Input must be length 25'
+    //return result;
   }
+  return result;
 
 };
 
