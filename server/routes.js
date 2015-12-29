@@ -20,9 +20,9 @@ module.exports = function(app, express) {
       res.json({result: controllers.trainRun(req)});
     });  
 
-  apiRouter.route('/simpleMNIST')
+  apiRouter.route('/runSimpleMNIST')
     .post(function(req, res) {
-      res.json({result: controllers.simpleMNIST(req)});
+      res.json({result: controllers.runSimpleMNIST(req)});
     });
 
   apiRouter.route('/runMNIST')

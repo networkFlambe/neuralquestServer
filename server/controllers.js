@@ -88,7 +88,7 @@ var trainRun = function(req) {
   }
 };
 
-var simpleMNIST = function(req) {
+var runSimpleMNIST = function(req) {
   var net;
   try {
     net = req.body;
@@ -138,6 +138,6 @@ var runMNIST = function(req) {
 };
 
 exports.trainRun = trainRun;
-exports.simpleMNIST = simpleMNIST;
+exports.runSimpleMNIST = runSimpleMNIST;
 exports.runMNIST = runMNIST;
 
