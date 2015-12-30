@@ -44,12 +44,34 @@ var validateRange = function(n, lo, hi) {
 }
 
 var round = function(value, decimals) {
-    return Number(Math.round(value+'e'+decimals)+'e-'+decimals);
+  return Number(Math.round(value+'e'+decimals)+'e-'+decimals);
+}
+
+var validateSimpleMNISTinput = function(input) {
+  if(input.constructor !== Array) {
+    return false;
+  }
+  if(input.length !== 25) {
+    return false;
+  }
+  var allowedInputs = {
+    '1': true,
+    '0': true
+  };
+  for(var i=0; i<input.length; i++) {
+    var item = input[i];
+    console.log(item, allowedInputs[item]);
+    if(allowedInputs[item] === undefined) {
+      return false;
+    }
+  }
+  return true;
 }
 
 
 exports.validateTrainRunInputs = validateTrainRunInputs;
 exports.round = round;
+exports.validateSimpleMNISTinput = validateSimpleMNISTinput;
 
 //export helper functions for testing
 exports.validateIndex = validateIndex;
