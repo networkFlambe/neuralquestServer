@@ -8,7 +8,7 @@ var validateTrainRunInputs = function(options, ffnetSetup) {
   if(!validateRange(options.errorThresh, 0, 1)) {
     return false;
   }
-  if(!validateRange(ffnetSetup.learningRate, 0, 1)) {
+  if(!validateRange(ffnetSetup.learningRate, 0, 10)) {
     return false;
   }
   if(!Array.isArray(ffnetSetup.hiddenSizes)) {
@@ -43,10 +43,16 @@ var validateRange = function(n, lo, hi) {
   return n >= lo && n <= hi;
 }
 
+var round = function(value, decimals) {
+    return Number(Math.round(value+'e'+decimals)+'e-'+decimals);
+}
+
 
 exports.validateTrainRunInputs = validateTrainRunInputs;
+exports.round = round;
 
 //export helper functions for testing
 exports.validateIndex = validateIndex;
 exports.checkInteger = checkInteger;
 exports.validateRange = validateRange;
+
