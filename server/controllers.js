@@ -185,7 +185,7 @@ var trainRunSimpleMNIST = function(req) {
     };
 
     //validate: same validation rules here as for trainRun: seems reasonable
-    if(utils.validateTrainRunInputs(options, ffnetSetup)) {
+    if(utils.validateTrainRunInputs(options, ffnetSetup) && utils.validateSimpleMNISTinput(input)) {
       var ffnet = new brain.NeuralNetwork(ffnetSetup);
 
       answer.push(ffnet.train(data, options));
