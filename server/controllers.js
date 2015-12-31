@@ -1,14 +1,14 @@
 var brain = require('brain');
 var fs = require('fs');
-var numeralnetobj = require('./assets/numeralNet.json');
 var simpleMNISTobj = require('./assets/simpleMNIST.json')
-var testdataobj = require('./assets/sampleMNIST.json'); 
 var utils = require('./utils.js');
 var simpleMNISTdata = require('./assets/simpleMNISTdata.json');
 
-//get trained MNIST brain
-var numeralnet = new brain.NeuralNetwork();
-numeralnet.fromJSON(numeralnetobj);
+//below is to get trained MNIST brain and example input...not currently in use
+//var numeralnetobj = require('./assets/numeralNet.json');
+//var numeralnet = new brain.NeuralNetwork();
+//numeralnet.fromJSON(numeralnetobj);
+//var testdataobj = require('./assets/sampleMNIST.json'); 
 
 var simpleMNIST = new brain.NeuralNetwork();
 simpleMNIST.fromJSON(simpleMNISTobj);
@@ -50,7 +50,7 @@ var trainRun = function(req) {
       binaryThresh:binaryThresh
     };
 
-    //validate
+    //validate nn setup & options 
     if(utils.validateTrainRunInputs(options, ffnetSetup)) {
       var ffnet = new brain.NeuralNetwork(ffnetSetup);
 
@@ -89,59 +89,8 @@ var trainRun = function(req) {
   }
 };
 
-var runSimpleMNIST = function(req) {
-  var net;
-  try {
-    net = req.body;
-  }
-  catch(err) {
-    net = {};
-  }
-  var input = net.input || [
-                            1, 1, 1, 1, 1,
-                            1, 0, 0, 0, 1,
-                            1, 0, 0, 0, 1,
-                            1, 0, 0, 0, 1,
-                            1, 1, 1, 1, 1
-                            ];
 
-  var result = {
-    predictedValue: null,
-    log: null
-  };
-  if(input.length === 25) {
-    result.predictedValue = simpleMNIST.run(input)
-    result.log = 'OK'  
-    //return result;
-  } else {
-    result.log = 'Input must be length 25'
-    //return result;
-  }
-  return result;
 
-};
-
-var runMNIST = function(req) {
-  var net;
-  try {
-    net = req.body;
-    var checkIndex = net.numberToCheck || 0;
-
-    if(utils.validateIndex(checkIndex)) {
-      var result = {
-        trueValue: checkIndex,
-        predictedValue: numeralnet.run(testdataobj[checkIndex])
-      }
-      return result;
-    } else {
-      return 'error';
-    }
-  }
-  catch(err) {
-    net = {};
-  }
-
-};
 
 
 var trainRunSimpleMNIST = function(req) {
@@ -184,7 +133,9 @@ var trainRunSimpleMNIST = function(req) {
       binaryThresh:binaryThresh
     };
 
-    //validate: same validation rules here as for trainRun: seems reasonable
+    //validate nn setup & options 
+    //same validation rules here as for trainRun, 
+    //but with additional check of simple digit input
     if(utils.validateTrainRunInputs(options, ffnetSetup) && utils.validateSimpleMNISTinput(input)) {
       var ffnet = new brain.NeuralNetwork(ffnetSetup);
 
@@ -232,6 +183,4 @@ var trainRunSimpleMNIST = function(req) {
 
 
 exports.trainRun = trainRun;
-exports.runSimpleMNIST = runSimpleMNIST;
-exports.runMNIST = runMNIST;
 exports.trainRunSimpleMNIST = trainRunSimpleMNIST;

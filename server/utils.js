@@ -1,7 +1,7 @@
 
 
 var validateTrainRunInputs = function(options, ffnetSetup) {
-
+  //validate each option and setup parameter using helper functions below
   if(!checkInteger(options.iterations) || !validateRange(options.iterations, 1, 20000)) {
     return false;
   }
@@ -23,14 +23,38 @@ var validateTrainRunInputs = function(options, ffnetSetup) {
       return false;
     }
   }
-  //not doing validation on data or input for trained network server-side
-  //should throw error on attempted training, if something wrong with these
-
+  //if passed all above tests, return true
   return true;
-
 };
 
 
+
+
+var validateSimpleMNISTinput = function(input) {
+  if(input.constructor !== Array) {
+    return false;
+  }
+  if(input.length !== 25) {
+    return false;
+  }
+  var allowedInputs = {
+    '1': true,
+    '0': true
+  };
+  for(var i=0; i<input.length; i++) {
+    var item = input[i];
+    if(allowedInputs[item] === undefined) {
+      return false;
+    }
+  }
+  //if passed all above tests, return true
+  return true;
+}
+
+
+
+
+//:::::::::::::::::::::::HELPER FUNCTIONS::::::::::::::::::::::::::
 var validateIndex = function(n) {
   return checkInteger(n) && validateRange(n, 0, 9);
 };
@@ -46,34 +70,18 @@ var validateRange = function(n, lo, hi) {
 var round = function(value, decimals) {
   return Number(Math.round(value+'e'+decimals)+'e-'+decimals);
 }
-
-var validateSimpleMNISTinput = function(input) {
-  if(input.constructor !== Array) {
-    return false;
-  }
-  if(input.length !== 25) {
-    return false;
-  }
-  var allowedInputs = {
-    '1': true,
-    '0': true
-  };
-  for(var i=0; i<input.length; i++) {
-    var item = input[i];
-    console.log(item, allowedInputs[item]);
-    if(allowedInputs[item] === undefined) {
-      return false;
-    }
-  }
-  return true;
-}
+//:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 
+
+//export functions to be used by other modules
 exports.validateTrainRunInputs = validateTrainRunInputs;
 exports.round = round;
 exports.validateSimpleMNISTinput = validateSimpleMNISTinput;
 
-//export helper functions for testing
+
+
+//export helper functions below solely for testing
 exports.validateIndex = validateIndex;
 exports.checkInteger = checkInteger;
 exports.validateRange = validateRange;
